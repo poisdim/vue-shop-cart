@@ -2,7 +2,7 @@
     <div class="catalog">
         <h1>Catalog</h1>
         <div class="catalog__list">
-            <CatalogItem v-for="(product,i) in products"
+            <CatalogItem v-for="(product,i) in getProducts"
                          :product="product"
                          @addToCart="addToCart"
                          :key="Math.random() + i"/>
@@ -13,29 +13,24 @@
 
 <script>
     import CatalogItem from "./CatalogItem";
-    import axios from "axios";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         name: 'Catalog',
         components: {CatalogItem},
         props: {},
         data() {
-            return {
-                products: []
-            }
+            return {}
         },
-        computed: {},
+        computed: {...mapGetters(['getProducts'])},
         methods: {
+            ...mapActions(['fetchProducts']),
             addToCart(x) {
                 console.log(x)
             }
         },
         mounted() {
-            axios('http://localhost:2222/products')
-                .then(({data}) => {
-                    this.products = data;
-                });
-
+            this.fetchProducts()
         }
     }
 </script>
