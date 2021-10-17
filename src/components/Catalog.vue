@@ -68,29 +68,5 @@
         }
     }
 
-    .filters {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .range-slider {
-        width: 200px;
-        margin: auto 16px;
-        text-align: center;
-        position: relative;
-    }
-
-    .range-slider svg, .range-slider input[type=range] {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-    }
-
-    input[type=range]::-webkit-slider-thumb {
-        z-index: 2;
-        position: relative;
-        top: 2px;
-        margin-top: -7px;
-    }
 </style>

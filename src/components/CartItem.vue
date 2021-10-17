@@ -7,7 +7,9 @@
             <p>Article:{{cartItem.article}}</p>
         </div>
         <div class="cartItem__quantity">
-            {{cartItem.count?cartItem.count:0}}
+            <button @click="decrement(index)">-</button>
+            {{ cartItem.count?cartItem.count:0 }}
+            <button @click="increment(index)">+</button>
         </div>
         <button @click="deleteFromCart(index)">Delete</button>
     </div>
@@ -19,13 +21,22 @@
         props: {
             cartItem: Object,
             deleteFromCart: Function,
+            // increment: Function,
+            // decrement: Function,
             index: Number,
         },
         data() {
             return {}
         },
         computed: {},
-        methods: {},
+        methods: {
+            decrement(index) {
+                this.$emit('decrement', index)
+            },
+            increment(index) {
+                this.$emit('increment', index)
+            }
+        },
 
     }
 </script>
@@ -42,14 +53,6 @@
 
         &__image {
             max-width: 50px;
-        }
-
-        .quantity__btn {
-            cursor: pointer;
-        }
-
-        .quantity__tools {
-            user-select: none;
         }
     }
 </style>

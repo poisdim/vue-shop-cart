@@ -21,6 +21,12 @@ export const store = createStore({
         },
         deleteFromCartAction({commit}, payload) {
             commit('deleteFromCart', payload)
+        },
+        incrementAction({commit}, payload) {
+            commit('increment', payload)
+        },
+        decrementAction({commit}, payload) {
+            commit('decrement', payload)
         }
     },
     mutations: {
@@ -42,6 +48,14 @@ export const store = createStore({
         },
         deleteFromCart(state, payload) {
             state.cart.splice(payload, 1)
+        },
+        increment(state, payload) {
+            state.cart[payload].count++
+        },
+        decrement(state, payload) {
+            if (state.cart[payload].count) {
+                state.cart[payload].count--
+            }
         }
     }
 });

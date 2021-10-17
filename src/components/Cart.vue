@@ -11,7 +11,12 @@
                   :key="Math.random()+i"
                   :deleteFromCart="deleteFromCart"
                   :index="i"
+                  @increment="increment"
+                  @decrement="decrement"
         />
+        <div class="cart__total">
+            {{cart.length===0?'Total:0':`$ ${total}`}}
+        </div>
     </div>
 </template>
 
@@ -26,13 +31,22 @@
             return {}
         },
         computed: {
-            ...mapState({cart: 'cart'})
+            ...mapState({cart: 'cart'}),
+            total() {
+                return this.cart.reduce((a, b) => a + b.price * b.count, 0)
+            }
         },
         methods: {
-            ...mapActions(['deleteFromCartAction']),
+            ...mapActions(['deleteFromCartAction', 'incrementAction', 'decrementAction']),
             deleteFromCart(i) {
                 this.deleteFromCartAction(i);
-            }
+            },
+            increment(i) {
+                this.incrementAction(i);
+            },
+            decrement(i) {
+                this.decrementAction(i);
+            },
         },
         components: {
             CartItem
@@ -75,8 +89,6 @@
             font-size: 20px;
         }
 
-        .total__name {
-            margin-right: $margin*2;
-        }
+
     }
 </style>
