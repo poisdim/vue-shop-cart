@@ -1,6 +1,11 @@
 <template>
     <div class="cart">
-        Cart
+        <div class="cart__link_to_cart">
+            <router-link :to="{name:'catalog'}">
+                Catalog
+            </router-link>
+        </div>
+        <h1>Cart {{cart.length===0?'is empty':''}}</h1>
         <CartItem v-for="(cartItem,i) in cart"
                   :cartItem="cartItem"
                   :key="Math.random()+i"
@@ -12,21 +17,17 @@
 
 <script>
     import CartItem from "./CartItem";
-    import {mapActions} from "vuex";
+    import {mapActions, mapState} from "vuex";
 
     export default {
         name: '',
-        props: {
-            cart: {
-                type: Array, default() {
-                    return []
-                }
-            }
-        },
+        props: {},
         data() {
             return {}
         },
-        computed: {},
+        computed: {
+            ...mapState({cart: 'cart'})
+        },
         methods: {
             ...mapActions(['deleteFromCartAction']),
             deleteFromCart(i) {
@@ -42,6 +43,24 @@
 <style lang="scss">
     .cart {
         margin-bottom: 100px;
+        position: relative;
+
+        &__link_to_cart {
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            padding: $padding*2;
+            border: solid 1px black;
+            box-shadow: 3px 5px 4px 0 black;
+            border-radius: 5px;
+            background: #ffffff;
+
+            a {
+                text-decoration: none;
+                font-weight: 700;
+                color: black;
+            }
+        }
 
         &__total {
             position: fixed;
