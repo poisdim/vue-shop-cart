@@ -24,13 +24,13 @@
         },
         computed: {...mapGetters(['getProducts'])},
         methods: {
-            ...mapActions(['fetchProducts']),
-            addToCart(x) {
-                console.log(x)
+            ...mapActions(['fetchProductsAction', 'addToCartAction']),
+            addToCart(data) {
+                this.addToCartAction(data)
             }
         },
         mounted() {
-            this.fetchProducts()
+            this.fetchProductsAction()
         }
     }
 </script>

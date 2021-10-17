@@ -1,24 +1,48 @@
 <template>
     <div class="cart">
         Cart
+        <CartItem v-for="(cartItem,i) in cart"
+                  :cartItem="cartItem"
+                  :key="Math.random()+i"
+                  :deleteFromCart="deleteFromCart"
+                  :index="i"
+        />
     </div>
 </template>
 
 <script>
+    import CartItem from "./CartItem";
+    import {mapActions} from "vuex";
+
     export default {
         name: '',
-        props: {},
+        props: {
+            cart: {
+                type: Array, default() {
+                    return []
+                }
+            }
+        },
         data() {
             return {}
         },
         computed: {},
-        methods: {}
+        methods: {
+            ...mapActions(['deleteFromCartAction']),
+            deleteFromCart(i) {
+                this.deleteFromCartAction(i);
+            }
+        },
+        components: {
+            CartItem
+        }
     }
 </script>
 
 <style lang="scss">
     .cart {
         margin-bottom: 100px;
+
         &__total {
             position: fixed;
             bottom: 0;

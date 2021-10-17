@@ -18,8 +18,8 @@
         },
         computed: {},
         methods: {
-            addToCart(){
-                this.$emit('addToCart',this.product.article)
+            addToCart() {
+                this.$emit('addToCart', this.product)
             }
         }
     }
